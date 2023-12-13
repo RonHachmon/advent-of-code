@@ -1,10 +1,24 @@
 import one.One;
+import three.Three;
 import two.Two;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
+        runThree();
+
         //runOne();
-        runTwo();
+        //runTwo();
+    }
+
+    private static void runThree() {
+        Three three=new Three("./src/three/inputs/input");
+        System.out.println(three.FindNumbersCoordinates());
+        System.out.println(three.getGearsPower());
     }
 
     private static void runOne() {
