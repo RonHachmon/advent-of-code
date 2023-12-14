@@ -1,18 +1,18 @@
 import five.Five;
-import four.Card;
 import four.Four;
 import one.One;
+import six.Six;
 import three.Three;
 import two.Two;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args)  {
-        runFive();
+        Six six=new Six("./src/six/inputs/input");
+        System.out.println(six.NumberOfWaysToWinBigRace());
+        //six.PrintRaces();
+        System.out.println(six.NumberOfWaysToWinForAllRacesMultiplied());
+
+        //runFive();
 
         //runFour();
         //runThree();
