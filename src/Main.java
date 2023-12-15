@@ -1,16 +1,17 @@
 import five.Five;
 import four.Four;
 import one.One;
+import seven.Seven;
 import six.Six;
 import three.Three;
 import two.Two;
 
 public class Main {
     public static void main(String[] args)  {
-        Six six=new Six("./src/six/inputs/input");
-        System.out.println(six.NumberOfWaysToWinBigRace());
-        //six.PrintRaces();
-        System.out.println(six.NumberOfWaysToWinForAllRacesMultiplied());
+        Seven seven=new Seven("./src/seven/inputs/input");
+        //seven.PrintHands();
+        System.out.println(seven.CalculateTotalMoney());
+        //runSix();
 
         //runFive();
 
@@ -18,6 +19,12 @@ public class Main {
         //runThree();
         //runOne();
         //runTwo();
+    }
+
+    private static void runSix() {
+        Six six=new Six("./src/six/inputs/input");
+        System.out.println(six.NumberOfWaysToWinBigRace());
+        System.out.println(six.NumberOfWaysToWinForAllRacesMultiplied());
     }
 
     private static void runFive() {
