@@ -1,3 +1,4 @@
+import eight.Eight;
 import five.Five;
 import four.Four;
 import one.One;
@@ -7,10 +8,13 @@ import three.Three;
 import two.Two;
 
 public class Main {
+
+    public static final String INPUT_PATH = "./src/%s/inputs/input";
+
     public static void main(String[] args)  {
-        Seven seven=new Seven("./src/seven/inputs/input");
-        //seven.PrintHands();
-        System.out.println(seven.CalculateTotalMoney());
+        runEight();
+//        System.out.println(eight.totalPathToEndPathPartTwo());
+        //runSeven();
         //runSix();
 
         //runFive();
@@ -21,8 +25,37 @@ public class Main {
         //runTwo();
     }
 
+    private static void runEight() {
+        String question="eight";
+        String path = String.format(INPUT_PATH, question);
+
+        Eight eight=new Eight(path);
+        System.out.println(eight.totalPathToEndPathPartOne());
+        System.out.println(eight.totalPathToEndPathPartTwo());
+    }
+
+    public static int gcd(int a, int b)
+    {
+        if (a == 0)
+            return b;
+
+        return gcd(b % a, a);
+    }
+
+    private static void runSeven() {
+        String question="seven";
+        String path = String.format(INPUT_PATH, question);
+        Seven seven=new Seven(path);
+        seven.isWithJoker(false);
+        System.out.println(seven.CalculateTotalMoney());
+        seven.isWithJoker(true);
+        System.out.println(seven.CalculateTotalMoney());
+    }
+
     private static void runSix() {
-        Six six=new Six("./src/six/inputs/input");
+        String question="six";
+        String path = String.format(INPUT_PATH, question);
+        Six six=new Six(path);
         System.out.println(six.NumberOfWaysToWinBigRace());
         System.out.println(six.NumberOfWaysToWinForAllRacesMultiplied());
     }
