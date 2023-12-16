@@ -1,6 +1,7 @@
 import eight.Eight;
 import five.Five;
 import four.Four;
+import nine.Nine;
 import one.One;
 import seven.Seven;
 import six.Six;
@@ -12,8 +13,9 @@ public class Main {
     public static final String INPUT_PATH = "./src/%s/inputs/input";
 
     public static void main(String[] args)  {
-        runEight();
-//        System.out.println(eight.totalPathToEndPathPartTwo());
+        runNine();
+
+        //runEight();
         //runSeven();
         //runSix();
 
@@ -25,6 +27,14 @@ public class Main {
         //runTwo();
     }
 
+    private static void runNine() {
+        String question="nine";
+        String path = String.format(INPUT_PATH, question);
+        Nine nine = new Nine(path);
+        System.out.println(nine.CalculatePreviousSequenceSum());
+        System.out.println(nine.CalculateNextSequenceSum());
+    }
+
     private static void runEight() {
         String question="eight";
         String path = String.format(INPUT_PATH, question);
@@ -34,13 +44,6 @@ public class Main {
         System.out.println(eight.totalPathToEndPathPartTwo());
     }
 
-    public static int gcd(int a, int b)
-    {
-        if (a == 0)
-            return b;
-
-        return gcd(b % a, a);
-    }
 
     private static void runSeven() {
         String question="seven";
