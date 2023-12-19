@@ -5,6 +5,7 @@ import nine.Nine;
 import one.One;
 import seven.Seven;
 import six.Six;
+import ten.Ten;
 import three.Three;
 import two.Two;
 
@@ -13,7 +14,17 @@ public class Main {
     public static final String INPUT_PATH = "./src/%s/inputs/input";
 
     public static void main(String[] args)  {
-        runNine();
+
+        //runSix();
+        String question="ten";
+        String path = String.format(INPUT_PATH, question);
+        Ten ten = new Ten(path);
+        //ten.PrintMazeSymbols();
+        System.out.println(ten.FindCircle());
+        System.out.println(ten.totalTrapInCircle());
+
+
+        //runNine();
 
         //runEight();
         //runSeven();
@@ -47,6 +58,7 @@ public class Main {
 
     private static void runSeven() {
         String question="seven";
+
         String path = String.format(INPUT_PATH, question);
         Seven seven=new Seven(path);
         seven.isWithJoker(false);
