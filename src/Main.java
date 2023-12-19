@@ -1,4 +1,5 @@
 import eight.Eight;
+import eleven.Eleven;
 import five.Five;
 import four.Four;
 import nine.Nine;
@@ -15,13 +16,11 @@ public class Main {
 
     public static void main(String[] args)  {
 
+        runEleven();
+
+
         //runSix();
-        String question="ten";
-        String path = String.format(INPUT_PATH, question);
-        Ten ten = new Ten(path);
-        //ten.PrintMazeSymbols();
-        System.out.println(ten.FindCircle());
-        System.out.println(ten.totalTrapInCircle());
+        //runTen();
 
 
         //runNine();
@@ -36,6 +35,22 @@ public class Main {
         //runThree();
         //runOne();
         //runTwo();
+    }
+
+    private static void runEleven() {
+        String question="eleven";
+        String path = String.format(INPUT_PATH, question);
+        Eleven eleven = new Eleven(path);
+        System.out.println(eleven.SumOfTotalShortestPath(1));
+        System.out.println(eleven.SumOfTotalShortestPath(1000000));
+    }
+
+    private static void runTen() {
+        String question="ten";
+        String path = String.format(INPUT_PATH, question);
+        Ten ten = new Ten(path);
+        System.out.println(ten.FindCircle());
+        System.out.println(ten.totalTrapInCircle());
     }
 
     private static void runNine() {
