@@ -38,7 +38,7 @@ public class Main {
     }
 
     private static void runEleven() {
-        String question="eleven";
+        String question="eleven"; 
         String path = String.format(INPUT_PATH, question);
         Eleven eleven = new Eleven(path);
         System.out.println(eleven.SumOfTotalShortestPath(1));

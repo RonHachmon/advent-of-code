@@ -33,7 +33,7 @@ public class Eleven {
 
 
 
-    public String SumOfTotalShortestPath(int duplicateValue) {
+    public BigInteger SumOfTotalShortestPath(int duplicateValue) {
         long total = 0;
         for (int i = 0; i < galaxiesList.size(); i++) {
             Point currentGalaxiePoint = galaxiesList.get(i);
@@ -47,7 +47,11 @@ public class Eleven {
         if (duplicateValue > 1) {
             duplicateValue--;
         }
-        return String.format("%d + (%d * %d)", total, this.totalDuplicate, duplicateValue);
+        String stringDuplicateValue = Integer.toString(duplicateValue);
+        BigInteger normalPath=BigInteger.valueOf(total);
+        BigInteger totalDuplicate=BigInteger.valueOf(this.totalDuplicate);
+        return totalDuplicate.multiply(new BigInteger(stringDuplicateValue)).add(normalPath);
+        //return String.format("%d + (%d * %d)", total, this.totalDuplicate, duplicateValue);
 
     }
 
