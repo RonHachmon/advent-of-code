@@ -4,48 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum HandType {
-    FIVE_OF_A_KIND {
-        @Override
-        int handValue() {
-            return 7;
-        }
-    },
-    FOUR_OF_A_KIND {
-        @Override
-        int handValue() {
-            return 6;
-        }
-    },
-    FULL_HOUSE {
-        @Override
-        int handValue() {
-            return 5;
-        }
-    },
-    THREE_OF_A_KIND {
-        @Override
-        int handValue() {
-            return 4;
-        }
-    },
-    TWO_PAIR {
-        @Override
-        int handValue() {
-            return 3;
-        }
-    },
-    ONE_PAIR {
-        @Override
-        int handValue() {
-            return 2;
-        }
-    },
-    HIGH_CARD {
-        @Override
-        int handValue() {
-            return 1;
-        }
-    };
+    FIVE_OF_A_KIND(7),
+    FOUR_OF_A_KIND(6),
+    FULL_HOUSE(5),
+    THREE_OF_A_KIND(4),
+    TWO_PAIR(3),
+    ONE_PAIR(2),
+    HIGH_CARD(1);
+
+    private final int handValue;
+
+     HandType(int handValue) {
+        this.handValue = handValue;
+    }
+
+    int handValue() {
+        return handValue;
+    }
 
     public static HandType identifyHandTypeWithJasJoker(String hand) {
         if (hand.length() != 5) {
@@ -161,7 +136,7 @@ public enum HandType {
 
     }
 
-    abstract int handValue();
+
 }
 
 
