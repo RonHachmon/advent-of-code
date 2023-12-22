@@ -1,33 +1,29 @@
 package seven;
 
+import static seven.PokerConfiguration.CARD_STRENGTH_ORDER;
+import static seven.PokerConfiguration.CARD_STRENGTH_ORDER_WITH_JOKER;
+
 public class Hand implements Comparable<Hand> {
-    public static String CARD_STRENGTH_ORDER="23456789TJQKA";
-    public static String CARD_STRENGTH_ORDER_WITH_JOKER="J23456789TQKA";
-    private static boolean staticWithJoker=true;
+
     private final String hand;
     private final int bid;
-    private final HandType handType;
-
-
-    public static void setWithJoker(boolean withJoker) {
-        staticWithJoker = withJoker;
-    }
+    private  HandType handType;
 
     public Hand(String hand, int bid) {
         this.hand = hand;
         this.bid = bid;
-        this.handType = extractHandType();
+        this.identifyHandType();
 
     }
 
-    private HandType extractHandType() {
-        if(staticWithJoker)
+    public void identifyHandType() {
+        if(PokerConfiguration.IsWithJoker())
         {
-            return HandType.identifyHandTypeWithJasJoker(hand);
+            this.handType = HandType.identifyHandTypeWithJasJoker(hand);
         }
         else
         {
-            return HandType.identifyHandTypeWithOutJoker(hand);
+            this.handType =  HandType.identifyHandTypeWithOutJoker(hand);
         }
 
 
@@ -62,13 +58,13 @@ public class Hand implements Comparable<Hand> {
                 char thisHandChar = this.getHand().charAt(i);
                 if(otherHandChar!=thisHandChar)
                 {
-                    if(staticWithJoker)
+                    if(PokerConfiguration.IsWithJoker())
                     {
-                        return compareChars(otherHandChar, thisHandChar,CARD_STRENGTH_ORDER_WITH_JOKER);
+                        return compareCardStrength(otherHandChar, thisHandChar,CARD_STRENGTH_ORDER_WITH_JOKER);
                     }
                     else
                     {
-                        return compareChars(otherHandChar, thisHandChar,CARD_STRENGTH_ORDER);
+                        return compareCardStrength(otherHandChar, thisHandChar,CARD_STRENGTH_ORDER);
                     }
 
                 }
@@ -76,7 +72,7 @@ public class Hand implements Comparable<Hand> {
         }
         return 0;
     }
-    private static int compareChars(char otherHandChar, char thisHandChar,String cardsOrder) {
+    private int compareCardStrength(char otherHandChar, char thisHandChar, String cardsOrder) {
         int otherCardStrength = cardsOrder.indexOf(otherHandChar);
         int thiCardStrength = cardsOrder.indexOf(thisHandChar);
         if(thiCardStrength>otherCardStrength)

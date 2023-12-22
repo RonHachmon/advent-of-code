@@ -2,12 +2,10 @@ package seven;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 public class Seven {
     private List<Hand> handList=new ArrayList<>();
@@ -15,7 +13,6 @@ public class Seven {
     {
         try {
             initHandList(path);
-            this.sortHandList();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -26,14 +23,20 @@ public class Seven {
             System.out.println("Hand "+hand.getHand()+" "+hand.getHandType());
         }
     }
-    public void isWithJoker(boolean isWithJoker)
+    public void setJokerConfiguration(boolean isWithJoker)
     {
-        Hand.setWithJoker(isWithJoker);
+        PokerConfiguration.SetIsWithJoker(isWithJoker);
+        for (Hand hand:handList)
+        {
+            hand.identifyHandType();
+        }
+
     }
 
     public long CalculateTotalMoney()
     {
         long sum=0;
+        this.sortHandList();
         for (int i = 0; i <handList.size() ; i++) {
             Hand hand = handList.get(i);
             sum+=(long)hand.getBid()*(i+1);
