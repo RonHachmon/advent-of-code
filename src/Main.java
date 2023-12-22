@@ -8,6 +8,7 @@ import seven.Seven;
 import six.Six;
 import ten.Ten;
 import three.Three;
+import twelve.Twelve;
 import two.Two;
 
 public class Main {
@@ -15,8 +16,16 @@ public class Main {
     public static final String INPUT_PATH = "./src/%s/inputs/input";
 
     public static void main(String[] args)  {
+        long start = System.currentTimeMillis(); // Record start time
+        runTwelve();
 
-        runEleven();
+        long end = System.currentTimeMillis(); // Record end time
+        long timeElapsed = end - start; // Calculate time elapsed
+
+        System.out.println("Time taken: " + timeElapsed + " milliseconds");
+
+
+        //runEleven();
 
 
         //runSix();
@@ -35,6 +44,89 @@ public class Main {
         //runThree();
         //runOne();
         //runTwo();
+    }
+
+    private static void runTwelve() {
+        String question="twelve";
+        String path = String.format(INPUT_PATH, question);
+
+
+        Twelve twelve = new Twelve(path);
+        long result5 = twelve.Sum5();
+        long result = twelve.Sum();
+        System.out.println("Result 5: " + result5); // Print the result
+        System.out.println("Result: " + result); // Print the result
+    }
+
+    public static int countArrangements(String input) {
+        String[] rows = input.split("\\s+");
+
+        int totalArrangements = 0;
+        for (int i = 0; i <rows.length-1 ; i=i+2) {
+            String springs = rows[i];
+            String[] damagedGroups = rows[i+1].split(",");
+
+            totalArrangements += countRowArrangements(springs, damagedGroups);
+
+        }
+
+//        for (String row : rows) {
+//            String[] parts = row.split(" ");
+//            String springs = parts[0];
+//            String[] damagedGroups = parts[1].split(",");
+//
+//            totalArrangements += countRowArrangements(springs, damagedGroups);
+//        }
+
+        return totalArrangements;
+    }
+
+    private static int countRowArrangements(String springs, String[] damagedGroups) {
+        int[] damagedSizes = new int[damagedGroups.length];
+        for (int i = 0; i < damagedGroups.length; i++) {
+            damagedSizes[i] = Integer.parseInt(damagedGroups[i]);
+        }
+
+        return countPossibleArrangements(springs.toCharArray(), damagedSizes, 0);
+    }
+
+    private static int countPossibleArrangements(char[] springs, int[] damagedSizes, int index) {
+        if (index == damagedSizes.length) {
+            return isValidArrangement(springs, damagedSizes) ? 1 : 0;
+        }
+
+        int total = 0;
+        int remainingLength = springs.length - sumArrayElements(damagedSizes, index);
+        int remainingGaps = damagedSizes.length - index - 1;
+
+        for (int i = 0; i <= remainingLength - remainingGaps; i++) {
+            damagedSizes[index] = i;
+            total += countPossibleArrangements(springs, damagedSizes, index + 1);
+        }
+
+        return total;
+    }
+
+    private static boolean isValidArrangement(char[] springs, int[] damagedSizes) {
+        int index = 0;
+
+        for (int size : damagedSizes) {
+            index += size;
+            if (index >= springs.length || springs[index] == '#') {
+                return false;
+            }
+            index++;
+        }
+
+        return true;
+    }
+
+    private static int sumArrayElements(int[] array, int startIndex) {
+        int sum = 0;
+        for (int i = startIndex; i < array.length; i++) {
+            sum += array[i];
+        }
+        return sum;
     }
 
     private static void runEleven() {
