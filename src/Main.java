@@ -17,7 +17,7 @@ public class Main {
 
     public static void main(String[] args)  {
         long start = System.currentTimeMillis(); // Record start time
-        runSeven();
+        runTwelve();
 
         long end = System.currentTimeMillis(); // Record end time
         long timeElapsed = end - start; // Calculate time elapsed
@@ -50,8 +50,13 @@ public class Main {
         String question="twelve";
         String path = String.format(INPUT_PATH, question);
         Twelve twelve = new Twelve(path);
-        System.out.println("Result 5: " + twelve.Sum5()); // Print the result
-        System.out.println("Result: " + twelve.Sum()); // Print the result
+        try {
+            System.out.println("Result 5: " + twelve.Sum5WithThreads(4));
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        //System.out.println("Result 5: " + twelve.Sum5()); // Print the result
+        //System.out.println("Result: " + twelve.Sum()); // Print the result
     }
 
 
