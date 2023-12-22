@@ -47,12 +47,16 @@ public class Eleven {
         if (duplicateValue > 1) {
             duplicateValue--;
         }
+        return calculateBigInteger(duplicateValue, total);
+        //return String.format("%d + (%d * %d)", total, this.totalDuplicate, duplicateValue);
+
+    }
+
+    private BigInteger calculateBigInteger(int duplicateValue, long total) {
         String stringDuplicateValue = Integer.toString(duplicateValue);
         BigInteger normalPath=BigInteger.valueOf(total);
         BigInteger totalDuplicate=BigInteger.valueOf(this.totalDuplicate);
         return totalDuplicate.multiply(new BigInteger(stringDuplicateValue)).add(normalPath);
-        //return String.format("%d + (%d * %d)", total, this.totalDuplicate, duplicateValue);
-
     }
 
     private long getShortestPath(Point currentGalaxiePoint, Point nextGalaxiePoint, long duplicateValue) {
