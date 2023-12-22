@@ -17,7 +17,7 @@ public class Main {
 
     public static void main(String[] args)  {
         long start = System.currentTimeMillis(); // Record start time
-        runTwelve();
+        runOne();
 
         long end = System.currentTimeMillis(); // Record end time
         long timeElapsed = end - start; // Calculate time elapsed

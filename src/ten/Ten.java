@@ -23,13 +23,11 @@ public class Ten {
         }
     }
 
+    //count element that are trap between two opposite vertical border of the circle
     public int totalTrapInCircle() {
         int total = 0;
-        boolean foundBorder=false;
         BorderType startBorderType;
         BorderType previousEndBorderType=BorderType.HORIZONTAL;
-        int startIndex = 0;
-        int startValue = 0;
         for (int row = 1; row < MAZE_LENGTH-1; row++) {
             startBorderType=null;
             for (int column = 1; column < MAZE_WIDTH-1; column++) {
@@ -41,7 +39,6 @@ public class Ten {
                         if(startBorderType==null&&borderType!=previousEndBorderType)
                         {
                             startBorderType=borderType;
-                            startIndex = column;
                         }
                         else
                         {
@@ -61,7 +58,6 @@ public class Ten {
             }
 
         }
-        this.PrintMazeNumericValues();
         return total;
     }
 
@@ -92,12 +88,6 @@ public class Ten {
         return mazePoint.getNumericValue() != NOT_FOUND;
     }
 
-    private boolean isContinousOfSameLine(int startValue, MazePoint mazePoint) {
-        if (mazePoint.getNumericValue() + 1 == startValue || mazePoint.getNumericValue() - 1 == startValue) {
-            return true;
-        }
-        return false;
-    }
 
     public int FindCircle() {
         List<Point> connectedMazePoint = startingPoint.getConnectedMazePoint();
@@ -106,7 +96,7 @@ public class Ten {
             Point point = connectedMazePoint.get(i);
             MazePoint mazePoint = maze[point.row()][point.column()];
             mazePoint.setNumericValue(startingPoint.getNumericValue() + 1);
-            int circleLength = findCircleLength2(mazePoint);
+            int circleLength = findCircleLength(mazePoint);
             if (circleLength != NOT_FOUND) {
                 return circleLength / 2;
             }
@@ -115,7 +105,7 @@ public class Ten {
         return NOT_FOUND;
     }
 
-    private int findCircleLength2(MazePoint currentPoint) {
+    private int findCircleLength(MazePoint currentPoint) {
         int numericValue = 1;
 
         while (currentPoint != this.startingPoint) {
@@ -124,7 +114,6 @@ public class Ten {
             List<Point> connectedMazePoint = currentPoint.getConnectedMazePoint();
             validatePoints(currentPoint, connectedMazePoint);
             if (connectedMazePoint == null) {
-                PrintMazeNumericValues();
                 return NOT_FOUND;
             }
             currentPoint = findUnreachedPipe(connectedMazePoint);
@@ -132,38 +121,13 @@ public class Ten {
                 if (isCurrentPointCanReachStart(connectedMazePoint)) {
                     currentPoint = this.startingPoint;
                 } else {
-                    PrintMazeNumericValues();
+
                     return NOT_FOUND;
                 }
             }
             numericValue++;
         }
-        this.PrintMazeNumericValues();
         return numericValue;
-    }
-
-    private int findCircleLength(MazePoint currentPoint) {
-        int previousPointNumericValue;
-
-        do {
-            previousPointNumericValue = currentPoint.getNumericValue();
-            List<Point> connectedMazePoint = currentPoint.getConnectedMazePoint();
-            validatePoints(currentPoint, connectedMazePoint);
-            if (connectedMazePoint == null) {
-                return NOT_FOUND;
-            }
-            currentPoint = findUnreachedPipe(connectedMazePoint);
-            if (currentPoint == null) {
-                if (isCurrentPointCanReachStart(connectedMazePoint)) {
-                    return previousPointNumericValue + 1;
-                } else {
-                    return -1;
-                }
-            }
-            currentPoint.setNumericValue(previousPointNumericValue + 1);
-            //this.PrintMazeNumericValues();
-        } while (currentPoint != startingPoint);
-        return NOT_FOUND;
     }
 
     private boolean isCurrentPointCanReachStart(List<Point> connectedMazePoint) {
