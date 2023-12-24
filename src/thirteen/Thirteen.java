@@ -1,8 +1,6 @@
 package thirteen;
 
-import thirteen.pattern.BitPattern;
-import thirteen.pattern.MirrorPatternInterface;
-import thirteen.pattern.StringPattern;
+import thirteen.pattern.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,6 +12,7 @@ public class Thirteen {
     public static final int NOT_FOUND = -1;
     List<StringPattern> stringPatternList = new ArrayList<>();
     List<BitPattern> bitPatternList = new ArrayList<>();
+
 
     public Thirteen(String path) {
         try {
@@ -67,11 +66,12 @@ public class Thirteen {
     {
         BitPattern.setTotalMismatch(totalMismatch);
 
+
         return findAllMirror(this.bitPatternList);
     }
-    private int findAllMirror(List<? extends MirrorPatternInterface> mirrorPatternInterfaces) {
+    private int findAllMirror(List<? extends AbstractPattern> mirrorPattern) {
         int sum=0;
-        for (MirrorPatternInterface pattern : mirrorPatternInterfaces) {
+        for (AbstractPattern pattern : mirrorPattern) {
             int columnMirror = pattern.FindColumnMirror();
             if(columnMirror!= NOT_FOUND)
             {
