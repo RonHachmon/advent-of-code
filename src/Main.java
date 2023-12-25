@@ -2,6 +2,7 @@ import eight.Eight;
 import eleven.Eleven;
 import five.Five;
 import four.Four;
+import fourteen.Fourteen;
 import nine.Nine;
 import one.One;
 import seven.Seven;
@@ -18,7 +19,7 @@ public class Main {
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis(); // Record start time
-        runThirteen();
+        runFourteen();
 
 
         long end = System.currentTimeMillis(); // Record end time
@@ -46,6 +47,17 @@ public class Main {
         //runThree();
         //runOne();
         //runTwo();
+    }
+
+    private static void runFourteen() {
+        String question = "fourteen";
+        String path = String.format(INPUT_PATH, question);
+        Fourteen fourteen = new Fourteen(path);
+        fourteen.moveSatelliteNorth();
+        System.out.println(fourteen.countSatelliteRocks());
+        fourteen.Reset();
+        fourteen.cyclone(1_000_000);
+        System.out.println(fourteen.countSatelliteRocks());
     }
 
     private static void runThirteen() {
