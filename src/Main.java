@@ -1,5 +1,6 @@
 import eight.Eight;
 import eleven.Eleven;
+import fifteen.Fifteen;
 import five.Five;
 import four.Four;
 import fourteen.Fourteen;
@@ -19,7 +20,21 @@ public class Main {
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis(); // Record start time
-        runFourteen();
+        runFifteen();
+
+//        String test="rn=1";
+//        int st=0;
+//        for(Character c:test.toCharArray())
+//        {
+//            int c1 = c.charValue();
+//            st+=c1;
+//            st*=17;
+//            st=st%256;
+//            System.out.println(c+" ASCII value "+ c1 );
+//            System.out.println("current st "+ st );
+//        }
+//        System.out.println(st);
+        //runFourteen();
 
 
         long end = System.currentTimeMillis(); // Record end time
@@ -48,6 +63,17 @@ public class Main {
         //runOne();
         //runTwo();
     }
+
+    private static void runFifteen() {
+        String question = "fifteen";
+        String path = String.format(INPUT_PATH, question);
+
+        Fifteen fifteen=new Fifteen(path);
+        System.out.println(fifteen.totalOfHash());
+        System.out.println(fifteen.CalculateFocusingPower());
+    }
+
+
 
     private static void runFourteen() {
         String question = "fourteen";
