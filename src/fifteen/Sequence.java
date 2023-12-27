@@ -1,4 +1,4 @@
-package fifteen.inputs;
+package fifteen;
 
 
 import fifteen.LenType;
