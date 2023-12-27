@@ -8,6 +8,7 @@ import nine.Nine;
 import one.One;
 import seven.Seven;
 import six.Six;
+import sixteen.Sixteen;
 import ten.Ten;
 import thirteen.Thirteen;
 import three.Three;
@@ -20,20 +21,10 @@ public class Main {
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis(); // Record start time
-        runFifteen();
+        runSixteen();
+        //runFifteen();
 
-//        String test="rn=1";
-//        int st=0;
-//        for(Character c:test.toCharArray())
-//        {
-//            int c1 = c.charValue();
-//            st+=c1;
-//            st*=17;
-//            st=st%256;
-//            System.out.println(c+" ASCII value "+ c1 );
-//            System.out.println("current st "+ st );
-//        }
-//        System.out.println(st);
+
         //runFourteen();
 
 
@@ -62,6 +53,14 @@ public class Main {
         //runThree();
         //runOne();
         //runTwo();
+    }
+
+    private static void runSixteen() {
+        String question = "sixteen";
+        String path = String.format(INPUT_PATH, question);
+        Sixteen sixteen =new Sixteen(path);
+        System.out.println(sixteen.energizedTopLeft());
+        System.out.println(sixteen.MaxEnergized());
     }
 
     private static void runFifteen() {

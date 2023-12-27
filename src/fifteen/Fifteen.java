@@ -1,7 +1,5 @@
 package fifteen;
 
-import fifteen.inputs.Sequence;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -64,11 +62,7 @@ public class Fifteen {
     {
         int total=0;
         for (Sequence sequence : sequenceList) {
-            sequence.PrintSequence();
-            int hashValue = sequence.getSequenceHash();
-            System.out.println("hashValue = " + hashValue);
             total+=sequence.getSequenceHash();
-            System.out.println("_____________________");
         }
         return total;
     }
