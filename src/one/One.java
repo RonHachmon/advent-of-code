@@ -6,7 +6,7 @@ import java.util.List;
 
 
 public class One {
-    private List<String> input = new ArrayList<>();
+    private final List<String> input = new ArrayList<>();
 
     private int res=0;
 
@@ -32,8 +32,6 @@ public class One {
         for (String line : input) {
             int firstDigit = this.extractFirstDigit(line);
             int lastDigit = this.extractLastDigit(line);
-            int temp= firstDigit * 10 + lastDigit;
-            System.out.println(line+" "+ temp);
             this.setRes(this.GetRes()+firstDigit * 10 + lastDigit);
         }
     }
