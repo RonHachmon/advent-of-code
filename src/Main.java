@@ -10,18 +10,29 @@ import seven.Seven;
 import six.Six;
 import sixteen.Sixteen;
 import ten.Ten;
+import test.Test;
 import thirteen.Thirteen;
 import three.Three;
 import twelve.Twelve;
 import two.Two;
 
+
 public class Main {
 
-    public static final String INPUT_PATH = "./src/%s/inputs/input";
+    public static final String INPUT_PATH = "./src/%s/inputs/small";
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis(); // Record start time
-        runSixteen();
+
+
+
+
+//        String question = "test";
+//        String path = String.format(INPUT_PATH, question);
+//        Test test = new Test(path);
+//        test.PrintMaze();
+//        System.out.println(test.ShortestPath());
+
         //runFifteen();
 
 

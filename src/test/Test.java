@@ -10,20 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Test {
-    public int[][] maze;
+    public MazePoint[][] maze;
     private final int MAZE_WIDTH;
     private final int MAZE_HEIGHT;
 
     public Test(String path) {
         try {
             List<String> allLines = Files.readAllLines(Paths.get(path));
-            maze = new int[allLines.size()][allLines.get(0).length()];
+            maze = new MazePoint[allLines.size()][allLines.get(0).length()];
             MAZE_WIDTH = maze[0].length;
             MAZE_HEIGHT = maze.length;
             for (int i = 0; i < allLines.size(); i++) {
                 String s = allLines.get(i);
                 for (int j = 0; j < s.length(); j++) {
-                    maze[i][j] = s.charAt(i) - '0';
+                    int value = s.charAt(j) - '0';
+                    maze[i][j] = new MazePoint(i,j,value);
                 }
 
             }
@@ -35,14 +36,17 @@ public class Test {
     public int ShortestPath() {
         PointAndDirection firstPoint = new PointAndDirection(new Point(1, 0), Direction.DOWN);
         PointAndDirection secondPoint = new PointAndDirection(new Point(0, 1), Direction.RIGHT);
+        maze[0][0].setVisited(true);
         return Math.min(shortestPath(firstPoint,1,0),shortestPath(secondPoint,1,0));
     }
 
     private int shortestPath(PointAndDirection currentPointAndDirection,int steps,int total) {
         if (isEndPoint(currentPointAndDirection)) {
-            return total+maze[MAZE_HEIGHT-1][MAZE_WIDTH-1];
+            return total+maze[MAZE_HEIGHT-1][MAZE_WIDTH-1].getValue();
         }
-        total += maze[currentPointAndDirection.getPoint().row()][currentPointAndDirection.getPoint().column()];
+        MazePoint currentMazePoint = maze[currentPointAndDirection.getPoint().row()][currentPointAndDirection.getPoint().column()];
+        total += currentMazePoint.getValue();
+        currentMazePoint.setVisited(true);
         List<PointAndDirection> neighbours = this.validAdjacentPoints(currentPointAndDirection);
         List<Integer> weights = new ArrayList<>();
         for (PointAndDirection neighbour : neighbours) {
@@ -81,17 +85,29 @@ public class Test {
         Direction direction=pointAndDirection.getDirection();
         List<PointAndDirection> neighbours = new ArrayList<>();
         if (point.row() > 0 && direction != Direction.DOWN)
-            neighbours.add(new PointAndDirection(new Point(point.row() - 1, point.column()),Direction.UP));
+            if(!maze[point.row() - 1][point.column()].isVisited())
+            {
+                neighbours.add(new PointAndDirection(new Point(point.row() - 1, point.column()),Direction.UP));
+            }
+
         if (point.row() < MAZE_HEIGHT - 1 && direction != Direction.UP)
-            neighbours.add(new PointAndDirection(new Point(point.row() - 1, point.column()),Direction.DOWN));
+            if(!maze[point.row() + 1][point.column()].isVisited()){
+                neighbours.add(new PointAndDirection(new Point(point.row() + 1, point.column()),Direction.DOWN));
+            }
+
         if (point.column() > 0 && direction != Direction.RIGHT)
-            neighbours.add(new PointAndDirection(new Point(point.row() , point.column()-1),Direction.LEFT));
+            if(!maze[point.row()][point.column()-1].isVisited()) {
+                neighbours.add(new PointAndDirection(new Point(point.row(), point.column() - 1), Direction.LEFT));
+            }
         if (point.column() < MAZE_WIDTH - 1 && direction != Direction.LEFT)
-            neighbours.add(new PointAndDirection(new Point(point.row(), point.column() + 1),Direction.RIGHT));
+            if(!maze[point.row()][point.column()+1].isVisited()) {
+                neighbours.add(new PointAndDirection(new Point(point.row(), point.column() + 1),Direction.RIGHT));
+            }
+
         return neighbours;
 
     }
-    private void PrintMaze() {
+    public void PrintMaze() {
         for (int i = 0; i < maze.length; i++) {
             for (int j = 0; j < maze[0].length; j++) {
                 System.out.print(maze[i][j]);

@@ -1,4 +1,4 @@
-package seventeen;
+package test;
 
 import eleven.Point;
 import sixteen.Direction;
