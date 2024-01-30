@@ -20,4 +20,7 @@ public enum Direction {
             }
         }
     }
+
+    public static void getDirection(seventeen.logic.Point currentPoint, seventeen.logic.Point currentPoint1) {
+    }
 }

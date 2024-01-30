@@ -7,6 +7,7 @@ import fourteen.Fourteen;
 import nine.Nine;
 import one.One;
 import seven.Seven;
+import seventeen.Seventeen;
 import six.Six;
 import sixteen.Sixteen;
 import ten.Ten;
@@ -15,13 +16,23 @@ import three.Three;
 import twelve.Twelve;
 import two.Two;
 
+
 public class Main {
 
     public static final String INPUT_PATH = "./src/%s/inputs/input";
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis(); // Record start time
-        runSixteen();
+
+
+
+
+        String question = "seventeen";
+        String path = String.format(INPUT_PATH, question);
+        Seventeen seventeen = new Seventeen(path);
+        seventeen.getPath();
+
+
         //runFifteen();
 
 
